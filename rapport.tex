@@ -1,0 +1,359 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts}            %For \leadsto
+\usepackage{amsmath}             %For \text
+\usepackage{amssymb}              %For checkmark and x
+\usepackage{fancybox}            %For \ovalbox
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes.geometric, calc}
+
+\newcommand \mML {\ensuremath\mu\textsl{ML}}
+\newcommand \kw [1] {\textsf{#1}}
+\newcommand \id [1] {\textsl{#1}}
+\newcommand \punc [1] {\kw{`#1'}}
+\newcommand \str [1] {\texttt{"#1"}}
+
+\DeclareUnicodeCharacter{03BB}{\ensuremath{{\color{black}{\lambda}}}}
+
+\graphicspath{ {./assets/images/} }
+
+\title{Projet}
+\author{Alexandre Toutant 20028191 - Nom2 - nom3 -nom4}
+
+\begin{document}
+\maketitle
+\parskip = \baselineskip
+
+\section{Modélisation en modèle E/A}
+
+\begin{center}
+  \begin{tikzpicture}[
+    entity/.style={rectangle, draw=black, minimum width=2cm, minimum
+      height=1cm},
+    relation/.style={diamond, draw=black, aspect=2, inner sep=1pt},
+    attr/.style={font=\small},
+    key/.style={attr, font=\small\underline},
+    line/.style={-}
+    ]
+
+    % Entités
+    \node[entity] (Client) {Client};
+    \node[entity, left=5cm of Client] (Livre) {Livre};
+    
+
+    % Calcul du milieu
+    \path (Livre) -- (Client) coordinate[pos=0.5] (ClientLivreMid);
+    
+    % Relation
+    \node[relation, above=2cm of ClientLivreMid] (Commande) {Commande};
+    \node[relation, below=2cm of ClientLivreMid] (Emprunte) {Emprunte};
+    \node[entity, right=3cm of Commande] (StatutCommande) {StatutCommande};
+    \node[entity, left=3cm of Emprunte] (StatutEmprunt) {StatutEmprunt};
+    
+    % Attributs
+    % Attr de Livre
+    \node[attr, left=0.5cm of Livre] (isbn) {\underline{isbn}};
+    \draw[line] (isbn) -- (Livre);
+
+    \node[attr, above left=0.1cm of isbn] (titre) {titre};
+    \draw[line] (titre) -- (Livre);
+
+    \node[attr, above=0.1cm of titre] (genre) {genre};
+    \draw[line] (genre) -- (Livre);
+
+    \node[attr, right=0.1cm of genre] (auteur) {auteur};
+    \draw[line] (auteur) -- (Livre);
+
+    \node[attr, above=0.3cm of Livre] (nbExemplaire) {nbExemplaire};
+    \draw[line] (nbExemplaire) -- (Livre);
+
+    % Attr de Client
+    \node[attr, right=0.5cm of Client] (idClient) {\underline{idClient}};
+    \draw[line] (Client) -- (idClient);
+
+    \node[attr, above=0.1cm of idClient] (permEmprunt) {permEmprunt};
+    \draw[line] (Client) -- (permEmprunt);
+
+    \node[attr, above left=0cm of permEmprunt] (nom) {nom};
+    \draw[line] (Client) -- (nom);
+
+    \node[attr, left=0cm of nom] (adresse) {adresse};
+    \draw[line] (Client) -- (adresse);
+
+    % Attr de Commande
+    \node[attr, left=0.5cm of Commande] (idCommande)
+    {\underline{idCommande}};
+    \draw[line] (idCommande) -- (Commande);
+
+    \node[attr, above=0.5cm of idCommande] (dateCommande) {dateCommande};
+    \draw[line] (dateCommande) -- (Commande);
+
+    \node[attr, right=0cm of dateCommande] (dateDispo) {dateDispo};
+    \draw[line] (dateDispo) -- (Commande);
+
+    \node[attr, right=0cm of dateDispo] (dateLimiteRetrait)
+    {dateLimiteRetrait};
+    \draw[line] (dateLimiteRetrait) -- (Commande);
+
+    \node[attr, right=0cm of dateLimiteRetrait] (rang) {rang};
+    \draw[line] (rang) -- (Commande);
+
+    % Attr de StatutCommande
+    \node[attr, above=0.5cm of StatutCommande] (statutCommande)
+    {\underline{statutCommande}};
+    \draw[line] (statutCommande) -- (StatutCommande);
+
+    % Attr de Emprunte
+    \node[attr, right=0.5cm of Emprunte] (idEmprunt) {\underline{idEmprunt}};
+    \draw[line] (Emprunte) -- (idEmprunt);
+
+    \node[attr, below=0.5cm of idEmprunt] (dateEmprunt) {dateEmprunt};
+    \draw[line] (Emprunte) -- (dateEmprunt);
+
+    \node[attr, left=0cm of dateEmprunt] (dateLimiteRetour) {dateLimiteRetour};
+    \draw[line] (Emprunte) -- (dateLimiteRetour);
+   
+    % Attr de StatutEmprunt
+    \node[attr, below=0.5cm of StatutEmprunt] (statutEmprunt)
+    {\underline{statutEmprunt}};
+    \draw[line] (StatutEmprunt) -- (statutEmprunt);
+
+    % Liens entités-relations
+    \draw[line] (Client) -- node[right] {0:3} (Commande);
+    \draw[line] (Commande) -- node[above] {1:1} (StatutCommande);
+    \draw[line] (Commande) -- node[left] {0:N} (Livre);
+    \draw[line] (Livre) -- node[below] {0:N} (Emprunte);
+    \draw[line] (Emprunte) -- node[right] {0:N} (Client);
+    \draw[line] (StatutEmprunt) -- node[above] {1:1} (Emprunte);
+
+  \end{tikzpicture}
+\end{center}
+
+Explications :
+\begin{itemize}
+\item \textbf{isbn et ids} : Ajoutés afin d'identifier facilement les
+  différents éléments.
+\item \textbf{Livre.nbExemplaire} : Représente le nombre d'exemplaires
+  disponibles pour être emprunté. Par exemple, disons que la bibliothèque
+  possède deux exemplaires du \textit{Multidictionnaire de la langue
+    française}, et qu'un client à une commande ou emprunte directement ce
+  livre, le nomnbre d'exemplaires disponibles sera diminué. Ceci explique aussi
+  la cardinalité de la relation entre \textbf{Livre} et \textbf{Emprunte},
+  puisqu'un livre avec plusieurs exemplaires peut donc être emprunté plusieurs
+  fois en même temps.
+\item \textbf{Commande.rang} : Représente le rang de cette commande parmi
+  toutes les commandes sur le même livre. Disons que deux clients créent une
+  commande pour le  \textit{Multidictionnaire de la langue française} alors
+  qu'il n'y a qu'un seul exemplaire dans la bibliothèque, les commandes seront
+  traitées selon la politique "première arrivée, première servie"
+  (\textit{FIFO}). Le rang permet de savoir combien de commandes sont devant la
+  notre.
+\item \textbf{Commande.dateCommande} : Représente la date où la commande fut
+  émise, dans le but d'ordonner la file d'attente.
+\item \textbf{Commande.dateDispo et Commande.dateLimiteRetrait} : Utilent pour
+  avoir un interval où le livre est réservé au client ayant fait cette
+  commande. Ainsi, lorsque le livre commandé est disponible, ces deux attributs
+  sont mis à jour. Si la date de limite de retrait est dépassée, alors la
+  commande devient expirée et la priorité est donnée à la prochaine commande.
+\item \textbf{StatutCommande.statutCommande} : Permet de faire l'énumération
+  des statuts possibles pour une commande. Les statuts possibles pour une
+  commande sont les suivants :
+  \begin {itemize} [label=$\bullet$]
+  \item En attente : La commande est passée, mais le client n'a pas encore la
+    priorité sur ce document.
+  \item Disponible pour le client : Le client à la priorité pour réserver ce
+    document, pour une fenêtre de deux jours.
+  \item Expirée : Le client avait la priorité pour réserver ce document, mais
+    celui-ci a trop attendu. Il pert donc sa priorité et la commande n'est plus
+    active.
+  \item Annulée : Le client à décidé d'annuler la commander de son côté; la
+    commande n'est plus active.
+  \item Honorée : Le client à réservé ce document. La commande n'est plus
+    active.
+  \end{itemize}
+  
+\item \textbf{Client.permEmprunt} : Permet de vérifier si un client peut
+  emprunter ou non. Par exemple, nous pourrions décider qu'un client ayant deux
+  retards actifs serait interdit d'emprunter un troisième document jusqu'au
+  règlement du retard.
+\item \textbf{Client.adresse} : Afin de sauver de l'espace, nous n'avons pas
+  représenté l'adresse comme étant un attribut complexe. Par contre, nous
+  le décomposeront dans le modèle relationnel.
+\item \textbf{StatutEmprunt.statutEmprunt} : Permet de faire l'énumération des
+  statuts possibles pour un emprunt. Ceux-ci permettent de faire des
+  statistiques sur les pratiques des clients. Les statuts possibles pour un
+  emprunt sont les suivants :
+  \begin{itemize}[label=$\bullet$]
+  \item Retourné : Un emprunt est terminé, sans retard; celui-ci n'est
+    plus actif et le livre redevient disponible.
+  \item Réglé : Un emprunt était en retard, mais le client à réglé ce
+    problème. L'emprunt n'est plus actif et le livre redevient disponible.
+  \item En retard : Un emprunt est en retard; une action du client est
+    nécessaire. Le livre est encore en possession du client.
+  \item En cours : Un emprunt est en cours, sans retard. Le livre est encore en
+    possession du client.
+  \end{itemize}
+  
+\end{itemize}
+
+
+\section{Transformation en modèle relationnel}
+Explications :
+\begin{itemize}
+\item Pour commencer, toutes les entités faisant parties du modèle E/A seront
+  conservées comme des tables différentes dans le modèle relationnel.
+\item Puisque nous n'avons pas de relation 2D 1:1, les associations présentes
+  dans le modèle E/A seront aussi présentes dans le modèle relationnel, tout en
+  ayant des clés étrangères pour lier les entités concernées.
+\item Afin de permettre d'avoir un client avec plusieurs adresses, et qu'une
+  adresse puisse être partagée par plusieurs clients, nous avons créé les table
+  \textbf{AdresseClient} et \textbf{Adresse}.
+\item Afin de nous faciliter la vie plus tard avec la gestion des rangs des
+  commandes, nous avons créé la table \textbf{RangCommande}.
+\end{itemize}
+
+Voici le modèle relationnel correspondant :
+\begin{itemize}[label=$\bullet$]
+\item Client(\underline{idClient}, permEmprunt, nom)
+\item AdresseClient(\underline{\#idClient}, \underline{\#idAdresse})
+\item Adresse(\underline{idAdresse}, rue, ville, code, pays)
+\item Livre(\underline{isbn}, titre, genre, auteur, nbExemplaire)
+\item StatutEmprunt(\underline{statutEmprunt})
+\item StatutCommande(\underline{statutCommande})
+\item Commande(\underline{idCommande}, \#isbn, \#idClient, \#statutCommande,
+  dateCommande, dateDispo, \\
+  dateLimiteRetrait)
+\item RangCommande(\underline{\#idCommande}, \#isbn, rang)
+\item Emprunte(\underline{idEmprunt}, \#isbn, \#idClient, \#statutEmprunt,
+  dateEmprunt, dateLimiteRetour)
+\end{itemize}
+
+\section{Normalisation}
+Pour la normalisation, nous normaliserons en 3NF. Pour les dépendances
+fonctionnelles, nous laissons de côté les dépendances triviales.
+\subsection{Client(\underline{idClient}, permEmprunt, nom)}
+\subsubsection{Dépendances fonctionnelles}
+Chaque client à un nom et potentiellement le droit d'emprunter des
+livres. Donc, l'identifiant client permet de déterminer les deux autres.
+$$idClient \rightarrow permEmprunt, \ nom$$
+
+\subsubsection{3NF}
+Comme nous avons déjà séparé \textbf{adresse} en d'autres relation, cette
+relation est en 1NF; tous les attributs contiennent une valeur atomique (1NF).
+Tout attribut non clé ne dépend pas d'une partie de la clé, donc cette relation
+est 2NF. Tout attribut non clé dépend de la clé, donc cette relation est
+3NF.
+
+
+\subsection{AdresseClient(\underline{\#idClient}, \underline{\#idAdresse})}
+\subsubsection{Dépendances fonctionnelles}
+Aucune dépendance fonctionnelle non triviale ici, puisque qu'il n'y a pas d'attribut
+non-clé.
+\subsubsection{3NF}
+Les attributs sont atomiques (1NF), ne dépendent pas d'une partie de la clé
+(2NF), et dépendent directement de la clé (3NF).
+
+
+\subsection{Adresse(\underline{idAdresse}, rue, ville, code, pays)}
+\subsubsection{Dépendances fonctionnelles}
+Chaque adresse à un identifiant unique permettant de retrouver ses
+détails. Donc, cet identifiant permet de retrouver de manière unique les autres
+attributs.
+$$idAdresse \rightarrow rue, \ ville, \ code, \ pays$$
+
+\subsubsection{3NF}
+Les attributs sont atomiques (1NF), ne dépendent pas d'une partie de la clé
+(2NF), et dépendent directement de la clé (3NF).
+
+
+\subsection{Livre(\underline{isbn}, titre, genre, auteur, nbExemplaire)}
+\subsubsection{Dépendances fonctionnelles}
+Chaque livre a un identifiant unique. Plusieurs titres semblables peuvent
+exister, et un auteur peut avoir écrit plusieurs livres. Donc, seul
+l'identifiant unique d'un livre permet de déterminer les autres attributs.
+$$isbn \rightarrow titre, \ genre, \ auteur, \ nbExemplaire$$
+
+\subsubsection{3NF}
+Les attributs sont atomiques (1NF), ne dépendent pas d'une partie de la clé
+(2NF), et dépendent directement de la clé (3NF).
+
+
+\subsection{StatutEmprunt(\underline{statutEmprunt}) et
+  StatutCommande(\underline{statutCommande})}
+\subsubsection{Dépendances fonctionnelles}
+Ces deux relations n'ont qu'un seul attribut, donc aucune dépendance
+fonctionnelle non triviale.
+
+\subsubsection{3NF}
+Les attributs sont atomiques (1NF), ne dépendent pas d'une partie de la clé
+(2NF), et dépendent directement de la clé (3NF).
+
+
+\subsection{Commande(\underline{idCommande}, \#isbn, \#idClient,
+  \#statutCommande, dateCommande, dateDispo, dateLimiteRetrait)}
+\subsubsection{Dépendances fonctionnelles}
+L'identifiant unique permet de déterminer de manière unique les autres
+attributs. Rien de dépend de l'isbn, car il peut y avoir plusieurs commandes
+sur un même livre; un client peut faire jusqu'à trois commandes, donc il peut y
+avoir plusieurs commandes pour un même client; il peut y avoir plusieurs
+commandes pour une même date.
+$$idCommande \rightarrow isbn, \ idClient, \ statutCommande, \ dateCommande, \
+dateDispo, \ dateLimiteRetrait$$
+
+\subsubsection{3NF}
+Les attributs sont atomiques (1NF), ne dépendent pas d'une partie de la clé
+(2NF), et dépendent directement de la clé (3NF).
+
+\subsection{RangCommande(\underline{\#idCommande}, \#isbn, rang)}
+\subsubsection{Dépendances fonctionnelles}
+Puisqu'il peut y avoir plusieurs commandes avec un même rang (mais différents
+livre), et qu'un livre peut avoir plusieurs commandes en attente, seul
+l'identifiant de commande permet de trouver les deux autres attributs.
+$$idCommande \rightarrow isbn, \ rang$$
+
+\subsubsection{3NF}
+Les attributs sont atomiques (1NF), ne dépendent pas d'une partie de la clé
+(2NF), et dépendent directement de la clé (3NF).
+
+\subsection{Emprunte(\underline{idEmprunt}, \#isbn, \#idClient,
+  \#statutEmprunt, dateEmprunt, dateLimiteRetour)}
+\subsubsection{Dépendances fonctionnelles}
+Puisqu'il peut y avoir plusieurs exemplaires d'un même livre, l'isbn ne permet
+par de déterminer un emprunt unique. Un client peut avoir plusieurs emprunts
+(complétés ou actifs), et plusieurs emprunts peuvent afin le même statut; même
+chose pour les dates. Donc, seul l'identifiant d'emprunt permet de déterminer
+les autres attributs.
+$$idEmprunt \rightarrow \ isbn, \ idClient,\ statutEmprunt, \ dateEmprunt, \
+dateLimiteRetour$$
+
+\subsubsection{3NF}
+Les attributs sont atomiques (1NF), ne dépendent pas d'une partie de la clé
+(2NF), et dépendent directement de la clé (3NF).
+
+\subsection{Schéma final}
+Le schéma n'a pas changé, puisque toutes les relations étaient déjà 3NF.
+\begin{itemize}[label=$\bullet$]
+\item Client(\underline{idClient}, permEmprunt, nom)
+\item AdresseClient(\underline{\#idClient}, \underline{\#idAdresse})
+\item Adresse(\underline{idAdresse}, rue, ville, code, pays)
+\item Livre(\underline{isbn}, titre, genre, auteur, nbExemplaire)
+\item StatutEmprunt(\underline{statutEmprunt})
+\item StatutCommande(\underline{statutCommande})
+\item Commande(\underline{idCommande}, \#isbn, \#idClient, \#statutCommande,
+  dateCommande, dateDispo, \\
+  dateLimiteRetrait)
+\item RangCommande(\underline{\#idCommande}, \#isbn, rang)
+\item Emprunte(\underline{idEmprunt}, \#isbn, \#idClient, \#statutEmprunt,
+  dateEmprunt, dateLimiteRetour)
+\end{itemize}
+
+\end{document}

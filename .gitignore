@@ -18,3 +18,7 @@ build/
 
 # React specific
 *.map
+rapport.aux
+rapport.log
+rapport.out
+rapport.synctex.gz

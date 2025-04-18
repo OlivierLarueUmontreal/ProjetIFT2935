@@ -23,39 +23,15 @@ cd frontend
 npm install
 ```
 
-### 🔹 **🛠️ Database Setup (PostgreSQL + Sequelize)**
-1. Start PosrgreSQL: 
+### 🔹 **🛠️ Database Setup (Docker + PostgreSQL + Sequelize)**
+1. Run the Docker-compose script at the root project folder to start the Bibliotheque db
 ``` sh
-sudo service postgresql start  # Linux
-net start postgresql           # Windows (Admin CMD)
+docker compose up -d
 ```
-2. Create the Database in PostgreSQL
-Connect to PostgreSQL:
-``` sh 
-psql -U prostges
-```
-Then create a database: 
-``` sh 
-CREATE DATABASE your_database_name;
-```
-3. Configure sequelize
-Edit backend/config.config.json and update the database credentials:
-``` json
-{
-  "development": {
-    "username": "postgres",
-    "password": "your_password",
-    "database": "your_database_name",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
-  }
-}
-```
-4. Run Migrations
-``` sh 
-cd backend 
-npx sequelize-cli db:migrate
-```
+And that's pretty much it... 
+(Make sur your own Postgresql service is down, or else the port will colide and the docker compose)
+
+IMPORTANT: If you want to restart the db completely (if you messed with the data and want to start fresh from seed.sql) you need to delete db-data from root of project. Otherwise, this folder contains all the database files of PostgreSQL to make the db data persistent after the docker container goes down.
 
 🚀 Run the Project
 🔹 Start Backend

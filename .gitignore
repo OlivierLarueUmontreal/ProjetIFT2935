@@ -14,7 +14,8 @@ build/
 .env
 .env.*
 
-
+# PostgreSQL
+db-data/
 
 # React specific
 *.map

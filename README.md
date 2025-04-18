@@ -1,4 +1,6 @@
-# Full-Stack Project (PostgreSQL, Express, React)
+# Projet IFT2935 (PostgreSQL, Express, React)
+
+Collaborators: (Olivier Larue:20269986, x, x, x)
 
 This project consists of:
 - **Backend:** Node.js with Express and Sequelize (PostgreSQL)
@@ -29,9 +31,9 @@ npm install
 docker compose up -d
 ```
 And that's pretty much it... 
-(Make sur your own Postgresql service is down, or else the port will colide and the docker compose)
+(Make sur your own Postgresql service is down, or else the port will colide and the docker compose command will fail)
 
-IMPORTANT: If you want to restart the db completely (if you messed with the data and want to start fresh from seed.sql) you need to delete db-data from root of project. Otherwise, this folder contains all the database files of PostgreSQL to make the db data persistent after the docker container goes down.
+IMPORTANT: If you want to restart the db completely (ex: if you messed with the data and want to start fresh from seed.sql) you need to delete tour db-data locateed at the root of the project. Otherwise, this folder contains all the database files of PostgreSQL to make sure your data is persisted even after the docker container goes down.
 
 🚀 Run the Project
 🔹 Start Backend
@@ -39,18 +41,18 @@ IMPORTANT: If you want to restart the db completely (if you messed with the data
 cd backend
 npm start 
 ```
+The backend listens on localhost:5000. You can check if it is running buy doing a GET at http://localhost:5000/api
 🔹 Start Frontend
 ``` sh
 cd frontend
 npm run dev 
 ```
+The frontend listens on localhost:5173.
 📌 Useful Commands
 🛠 Backend Commands
 Command	Description
 ``` sh
 npm start	# Start the backend
 npm run dev	# Start frontend 
-npx sequelize-cli db:migrate	# Run all migrations
-npx sequelize-cli model:generate --name ModelName --attributes column:type	#Create a new Sequelize model
-npx sequelize-cli db:seed:all	# Run seed data
+docker compose up -d # start docker compose script that will start a PostgreSQL server.
 ```

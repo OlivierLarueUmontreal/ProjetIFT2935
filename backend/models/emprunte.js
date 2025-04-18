@@ -1,5 +1,6 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+import Sequelize from 'sequelize';
+
+const emprunte = function (sequelize, DataTypes) {
   return sequelize.define('emprunte', {
     idemprunt: {
       autoIncrement: true,
@@ -55,3 +56,5 @@ module.exports = function(sequelize, DataTypes) {
     ]
   });
 };
+
+export default emprunte;

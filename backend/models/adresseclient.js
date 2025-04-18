@@ -1,5 +1,7 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+
+import Sequelize from 'sequelize';
+
+const adresseClient = function (sequelize, DataTypes) {
   return sequelize.define('adresseclient', {
     idclient: {
       type: DataTypes.INTEGER,
@@ -36,3 +38,5 @@ module.exports = function(sequelize, DataTypes) {
     ]
   });
 };
+
+export default adresseClient;

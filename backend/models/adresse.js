@@ -1,5 +1,6 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+import Sequelize from 'sequelize';
+
+const adresse = function (sequelize, DataTypes) {
   return sequelize.define('adresse', {
     idadresse: {
       autoIncrement: true,
@@ -39,3 +40,5 @@ module.exports = function(sequelize, DataTypes) {
     ]
   });
 };
+
+export default adresse;

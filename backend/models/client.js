@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+import Sequelize from 'sequelize';
+const client = function (sequelize, DataTypes) {
   return sequelize.define('client', {
     idclient: {
       autoIncrement: true,
@@ -31,3 +31,5 @@ module.exports = function(sequelize, DataTypes) {
     ]
   });
 };
+
+export default client;

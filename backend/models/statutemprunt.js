@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+import Sequelize from 'sequelize';
+const statutemprunt = function (sequelize, DataTypes) {
   return sequelize.define('statutemprunt', {
     statutemprunt: {
       type: DataTypes.STRING(50),
@@ -22,3 +22,4 @@ module.exports = function(sequelize, DataTypes) {
     ]
   });
 };
+export default statutemprunt;

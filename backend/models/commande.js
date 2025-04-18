@@ -1,5 +1,6 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+import Sequelize from 'sequelize';
+
+const commande = function (sequelize, DataTypes) {
   return sequelize.define('commande', {
     idcommande: {
       autoIncrement: true,
@@ -59,3 +60,5 @@ module.exports = function(sequelize, DataTypes) {
     ]
   });
 };
+
+export default commande;

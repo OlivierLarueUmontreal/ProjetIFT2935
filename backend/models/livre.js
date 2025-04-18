@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+import Sequelize from 'sequelize';
+const livre = function (sequelize, DataTypes) {
   return sequelize.define('livre', {
     isbn: {
       type: DataTypes.STRING(20),
@@ -38,3 +38,4 @@ module.exports = function(sequelize, DataTypes) {
     ]
   });
 };
+export default livre;

@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+import Sequelize from 'sequelize';
+const rangcommande = function (sequelize, DataTypes) {
   return sequelize.define('rangcommande', {
     idcommande: {
       type: DataTypes.INTEGER,
@@ -40,3 +40,4 @@ module.exports = function(sequelize, DataTypes) {
     ]
   });
 };
+export default rangcommande;

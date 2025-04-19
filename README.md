@@ -6,12 +6,13 @@ This project consists of:
 - **Backend:** Node.js with Express and Sequelize (PostgreSQL)
 - **Frontend:** React (JavaScript)
 - **Database:** PostgreSQL
+- **Docker:** To start to PostgreSQL server.
 
 ---
 
-## 🚀 Getting Started  
+## Getting Started  
 
-### **1️⃣ Install Dependencies**  
+### **Install Dependencies**  
 
 #### 🔹 **Backend Setup**  
 ```sh
@@ -49,8 +50,6 @@ npm run dev
 ```
 The frontend listens on localhost:5173.
 📌 Useful Commands
-🛠 Backend Commands
-Command	Description
 ``` sh
 npm start	# Start the backend
 npm run dev	# Start frontend 

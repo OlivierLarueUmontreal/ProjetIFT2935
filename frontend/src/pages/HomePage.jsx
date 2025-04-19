@@ -13,7 +13,7 @@ function HomePage() {
                 <button className="homePage-btn" onClick={() => navigate("/question4")}>Question 4</button>
             </div>
             <footer className="footer">
-                <p>Réalisé par [Olivier Larue (20269986), Claudéric DeRoy (), Alex ..., Noah Tremblay Taillon (20190661)]</p>
+                <p>Réalisé par [Olivier Larue (20269986), Claudéric DeRoy (20102789), Alex ..., Noah Tremblay Taillon (20190661)]</p>
                 <p>Hiver 2025</p>
             </footer>
         </div>

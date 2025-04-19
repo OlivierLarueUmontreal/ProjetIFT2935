@@ -1,6 +1,6 @@
 # Projet IFT2935 (PostgreSQL, Express, React)
 
-Collaborators: (Olivier Larue:20269986, x, x, x)
+Collaborators: (Olivier Larue:20269986, Claudéric DeRoy:20102789, x, x)
 
 This project consists of:
 - **Backend:** Node.js with Express and Sequelize (PostgreSQL)

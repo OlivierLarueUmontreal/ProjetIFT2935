@@ -10,10 +10,6 @@ build/
 .temp/
 .cache/
 
-# Environment variables
-.env
-.env.*
-
 # PostgreSQL
 db-data/
 

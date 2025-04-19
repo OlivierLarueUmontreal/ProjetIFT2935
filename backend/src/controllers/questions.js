@@ -47,7 +47,7 @@ export const question1 = async (_, response) => {
 
 export const question2 = async (_, response) => {
     try {
-        let result = await sequelize.query(question2Query);
+        const [result, metadata] = await sequelize.query(question2Query);
         response.json(result);
     } catch (error) {
         console.error(error);
@@ -57,7 +57,7 @@ export const question2 = async (_, response) => {
 
 export const question3 = async (_, response) => {
     try {
-        let result = await sequelize.query(question3Query);
+        const [result, metadata] = await sequelize.query(question3Query);
         response.json(result);
     } catch (error) {
         console.error(error);
@@ -67,7 +67,7 @@ export const question3 = async (_, response) => {
 
 export const question4 = async (_, response) => {
     try {
-        let result = await sequelize.query(question4Query);
+        const [result, metadata] = await sequelize.query(question4Query);
         response.json(result);
     } catch (error) {
         console.error(error);

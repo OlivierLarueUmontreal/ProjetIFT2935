@@ -27,7 +27,6 @@ function App() {
         <Route path="/question4" element={<Question4 />} />
       </Routes>
     </Router>
-    // TODO mettre les Routes les restante ( les pages des 4 questions.)    
   );
 }
 

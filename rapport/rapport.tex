@@ -13,6 +13,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage[parfill]{parskip}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{tikz}
 \usepackage{listings}
 \usepackage{xcolor}
@@ -690,10 +691,61 @@ ORDER BY nbCommandes DESC;
 \end{itemize}
 
 \section{Développement}
+Le projet a été conçu comme une application full stack. Le front-end a été développé avec React, un framework JavaScript qui facilite le développement d'interfaces. Pour le back-end, nous avons utilisé Express.js, un framework léger et rapide à prendre en main.
 
-Screenshot1
-Scrennshot2
-...
+Le tout est hébergé dans un répertoire GitHub, incluant le front-end, le back-end, ainsi que les scripts nécessaires à la base de données. Nous avons choisi de tout centraliser dans un seul dépôt étant donné la petite taille du projet, ce qui simplifie la gestion et la collaboration.
+
+Nous avons utilisé Sequelize comme ORM pour faciliter les requêtes entre Express.js et la base de données PostgreSQL. Sequelize s’intègre bien à l’environnement JavaScript, ce qui a renforcé notre choix.
+
+La base de données est gérée dans un conteneur Docker, via un script Docker Compose. Ce dernier configure automatiquement un serveur PostgreSQL local, dont les données sont initialement populées à l’aide d’un fichier seed.sql, permettant à chaque utilisateur d’avoir les mêmes données initiales.
+
+Pour faciliter l’installation et l'exécution du projet, un fichier README.md détaille les étapes nécessaires. Le développement a été effectué avec Visual Studio Code, en s’appuyant sur la documentation officielle de chaque technologie.
+
+\textbf{Par exemple :}
+\begin{itemize}
+    \item Pour Express.js : expressjs.com/en/starter/installing.html
+    \item Pour React : react.dev/learn/installation et react.dev/learn
+    \item Pour Sequelize : https://sequelize.org/docs/v6/getting-started/
+\end{itemize}
+
+
+\textbf{Le projet comporte 5 pages:}
+\begin{itemize}
+    \item La page d'acceuil (HomePage)
+    \item Pages 1-4. Une page pour chaque questions
+\end{itemize}
+
+\textbf{L'api du backend comporte sur 5 routes: }
+\begin{itemize}
+    \item http://localhost:5000/api  (pour verifier si l'api fonctionne. Route de base de l'api.)
+    \item http://localhost:5000/api/question1 (pour obtenir le contenu en format JSON de la requête pour la question 1)
+    \item http://localhost:5000/api/question2 (pour obtenir le contenu en format JSON de la requête pour la question 2)
+    \item http://localhost:5000/api/question3 (pour obtenir le contenu en format JSON de la requête pour la question 3)
+    \item http://localhost:5000/api/question4 (pour obtenir le contenu en format JSON de la requête pour la question 4)
+\end{itemize}
+
+Une fois le projet lancé et que vous accédez à \texttt{localhost:5173}, vous arrivez sur la page d’accueil de l'application :
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{projetHomePage.png}
+    \label{fig:}
+\end{figure}
+
+La page d’accueil contient quatre boutons, chacun représentant une question que nous avons formulée précédemment. Lorsqu’on clique sur l’un de ces boutons, la page affiche :
+\begin{itemize}
+    \item la question sélectionnée,
+    \item la requête SQL correspondante,
+    \item le résultat de cette requête.
+\end{itemize}
+
+Par exemple, pour la question 1, voici ce que l’on obtient : 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{projetQuestion1.png}
+    \label{fig:}
+\end{figure}
+
+La même logique s’applique pour les quatre questions : chaque page est dédiée à une question spécifique et affiche la question, la requête SQL utilisée, ainsi que le résultat obtenu.
 
 \section{Installation}
 Une \href{file:./promenade_projet_ift_2935_groupe_20.mp4}{vidéo} ainsi que des instructions dans un \href{https://github.com/OlivierLarueUmontreal/ProjetIFT2935}{dépôt} GitHub expliquent comment procéder pour l'installation et l'exécution du projet.

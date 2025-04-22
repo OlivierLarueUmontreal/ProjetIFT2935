@@ -31,10 +31,16 @@ npm install
 ``` sh
 docker compose up -d
 ```
-And that's pretty much it... 
-(Make sur your own Postgresql service is down, or else the port will colide and the docker compose command will fail)
+And that's pretty much it...   
 
-IMPORTANT: If you want to restart the db completely (ex: if you messed with the data and want to start fresh from seed.sql) you need to delete tour db-data locateed at the root of the project. Otherwise, this folder contains all the database files of PostgreSQL to make sure your data is persisted even after the docker container goes down.
+Make sur your own Postgresql service is down, or else the port will colide and the docker compose command will fail.  
+If this happens, use this command:  
+
+```sh 
+sudo systemctl stop postgresql 
+```
+
+IMPORTANT: If you want to restart the db completely (ex: if you messed with the data and want to start fresh from seed.sql) you need to delete your db-data locateed at the root of the project. This folder contains all the database files of PostgreSQL to make sure your data is persisted even after the docker container goes down.
 
 .env file was pushed on purpose so that everyone can just plug in the docker compose command and run the DB without any other configuration
 
